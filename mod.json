@@ -1,0 +1,10 @@
+{
+    "geode": "5.0.0",
+    "id": "mateo18023.grand_bowling_center",
+    "version": "1.0.0",
+    "name": "The Grand Bowling Center",
+    "developer": "mateo18023",
+    "description": "Premium menu expansion adding the Grand Bowling Center layout.",
+    "dependencies": {}
+}
+
