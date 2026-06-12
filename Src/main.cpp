@@ -9,21 +9,24 @@ class $modify(GrandBowlingManager, MenuLayer) {
 
         auto* bottomMenu = this->getChildByID("bottom-menu");
         if (bottomMenu) {
-            auto* bowlingSprite = CCSprite::createWithSpriteFrameName("GJ_everyplayBtn_001.png");
+            // Use a standard, globally available button sprite frame
+            auto* bowlingSprite = CCSprite::createWithSpriteFrameName("GJ_playBtn_001.png");
+            
+            // Move the button creation INSIDE the sprite check for safety
             if (bowlingSprite) {
-                bowlingSprite->setColor({ 0, 255, 180 }); 
-            }
+                bowlingSprite->setColor({ 0, 255, 180 }); // Custom green/cyan color
 
-            auto* bowlingButton = CCMenuItemSpriteExtra::create(
-                bowlingSprite,
-                this,
-                menu_selector(GrandBowlingManager::onGrandBowlingTap)
-            );
+                auto* bowlingButton = CCMenuItemSpriteExtra::create(
+                    bowlingSprite,
+                    this,
+                    menu_selector(GrandBowlingManager::onGrandBowlingTap)
+                );
 
-            if (bowlingButton) {
-                bowlingButton->setID("grand-bowling-shortcut"_spr);
-                bottomMenu->addChild(bowlingButton);
-                bottomMenu->updateLayout();
+                if (bowlingButton) {
+                    bowlingButton->setID("grand-bowling-shortcut"_spr);
+                    bottomMenu->addChild(bowlingButton);
+                    bottomMenu->updateLayout();
+                }
             }
         }
         return true;
