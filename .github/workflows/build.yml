@@ -12,12 +12,14 @@ jobs:
       matrix:
         config:
           - name: Android 64-bit
+            os: ubuntu-latest
             target: Android64
           - name: Windows 64-bit
+            os: windows-latest
             target: Win64
 
     name: ${{ matrix.config.name }}
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.config.os }}
 
     steps:
       - uses: actions/checkout@v4
@@ -25,4 +27,5 @@ jobs:
       - name: Build Mod
         uses: geode-sdk/build-geode-mod@main
         with:
+          bindings: geode-sdk/bindings
           target: ${{ matrix.config.target }}
