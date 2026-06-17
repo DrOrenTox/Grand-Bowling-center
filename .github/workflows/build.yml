@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   build:
@@ -24,7 +25,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # This step automatically installs the Geode SDK and sets the paths for CMake!
       - name: Build Mod
         uses: geode-sdk/build-geode-mod@main
         with:
