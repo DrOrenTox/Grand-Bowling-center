@@ -7,14 +7,14 @@ class $modify(GrandBowlingManager, MenuLayer) {
     bool init() {
         if (!MenuLayer::init()) return false;
 
-        auto* bottomMenu = this->getChildByID("bottom-menu");
+        // Safely cast to CCMenu to avoid layout and node crashes on Android
+        auto* bottomMenu = typeinfo_cast<CCMenu*>(this->getChildByID("bottom-menu"));
         if (bottomMenu) {
-            // Use a standard, globally available button sprite frame
             auto* bowlingSprite = CCSprite::createWithSpriteFrameName("GJ_playBtn_001.png");
             
-            // Move the button creation INSIDE the sprite check for safety
             if (bowlingSprite) {
-                bowlingSprite->setColor({ 0, 255, 180 }); // Custom green/cyan color
+                bowlingSprite->setColor({ 0, 255, 180 }); // Custom neon green/cyan
+                bowlingSprite->setScale(0.4f); // Scale it down so it fits the bottom bar neatly
 
                 auto* bowlingButton = CCMenuItemSpriteExtra::create(
                     bowlingSprite,
@@ -23,7 +23,8 @@ class $modify(GrandBowlingManager, MenuLayer) {
                 );
 
                 if (bowlingButton) {
-                    bowlingButton->setID("grand-bowling-shortcut"_spr);
+                    // Removed the broken _spr extension, using a safe string registration
+                    bowlingButton->setID("grand-bowling-shortcut");
                     bottomMenu->addChild(bowlingButton);
                     bottomMenu->updateLayout();
                 }
@@ -40,3 +41,4 @@ class $modify(GrandBowlingManager, MenuLayer) {
         )->show();
     }
 };
+
