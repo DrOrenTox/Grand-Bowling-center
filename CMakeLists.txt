@@ -4,11 +4,8 @@ project(grand-bowling-center)
 
 find_package(Geode REQUIRED)
 
+# Cleaned up old architecture tags to prevent Geode v5 compile breaks
 add_geode_mod(
     ${PROJECT_NAME}
-    X86
-    X64
-    ARM
     SOURCES src/main.cpp
 )
-
